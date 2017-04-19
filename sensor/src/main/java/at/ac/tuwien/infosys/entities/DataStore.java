@@ -22,7 +22,10 @@ public class DataStore {
     }
 
     public List<String> getTimeStampsList(){
-        return new ArrayList<>(sensorDataFrameMap.keySet());
+
+        List timeStampsList = new ArrayList<>(sensorDataFrameMap.keySet());
+        Collections.sort(timeStampsList);
+        return timeStampsList;
     };
 
     public void putSensorDataFrame(String timeStamp, String data){
