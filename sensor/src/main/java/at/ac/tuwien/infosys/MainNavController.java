@@ -1,9 +1,7 @@
 package at.ac.tuwien.infosys;
 
 import at.ac.tuwien.infosys.entities.DataStore;
-import at.ac.tuwien.infosys.entities.SensorDataFrame;
 import at.ac.tuwien.infosys.ui.MessagesUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,15 +29,7 @@ public class MainNavController {
     @RequestMapping(RECEIVE_URL)
     public String receive(Model model, RedirectAttributes redirectAttributes) {
         try {
-            List<String> timeStamps = dataStoreInstance.getTimeStampsList();
-            List<String> timeStampsFormatted =  new ArrayList<>();
-            for (String timeStamp:timeStamps){
-                long time= Long.parseLong(timeStamp);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
-                timeStampsFormatted.add(sdf.format(time));
-            }
-            model.addAttribute(ModelAttributes.OBJECT_LIST, timeStampsFormatted);
-
+            model.addAttribute(ModelAttributes.OBJECT_LIST, Utils.transformLongToDate(dataStoreInstance.getTimeStampsList()));
         } catch (Exception ex) {
             return redirectWithError(redirectAttributes, MainNavController.INDEX_URL, "Unable to get access to the data", ex);
         }
