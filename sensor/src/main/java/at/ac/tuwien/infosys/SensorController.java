@@ -19,7 +19,6 @@ public class SensorController {
 
     private List<String> timeStamps=new ArrayList<>();
 
-
     @RequestMapping(value = RECEIVE, method = RequestMethod.POST)
     public void acceptData(@RequestParam("time") String time) throws Exception {
         long timeStamp= Long.parseLong(time);
