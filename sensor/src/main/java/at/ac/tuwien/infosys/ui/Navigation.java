@@ -13,7 +13,8 @@ import java.util.List;
 public class Navigation {
     public List<NavEntry> getNavEntries(){
         return Arrays.asList(
-                new NavEntry (MainNavController.INDEX_URL,"index", "Start"));
+                new NavEntry (MainNavController.INDEX_URL,"index", "Start"),
+                new NavEntry (MainNavController.RECEIVE_URL,"receive", "Received data"));
     }
 
     private static class NavEntry {

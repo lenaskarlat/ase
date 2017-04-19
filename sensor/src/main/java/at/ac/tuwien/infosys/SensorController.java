@@ -1,5 +1,6 @@
 package at.ac.tuwien.infosys;
 
+import at.ac.tuwien.infosys.entities.DataStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,27 +15,33 @@ import java.util.List;
 @Controller
 public class SensorController {
 
-    private static final String START = "/";
-    private static final String RECEIVE = "/receive";
+    private static final String INDEX_URL = "/";
+    private static final String RECEIVE_URL = "/receive";
 
-    private List<String> timeStamps=new ArrayList<>();
 
-    @RequestMapping(value = RECEIVE, method = RequestMethod.POST)
-    public void acceptData(@RequestParam("time") String time) throws Exception {
-        long timeStamp= Long.parseLong(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
-        timeStamps.add(sdf.format(timeStamp));
+    DataStore dataStoreInstance = DataStore.getInstance();
+
+    @RequestMapping(value = RECEIVE_URL, method = RequestMethod.POST)
+    public void acceptData(@RequestParam("time") String time, @RequestParam("data") String data) throws Exception {
+        dataStoreInstance.putSensorDataFrame(time, data);
     }
 
-    @RequestMapping(value = START, method = RequestMethod.GET)
+    @RequestMapping(value = INDEX_URL, method = RequestMethod.GET)
     public String start(Model model) {
         return "index";
     }
 
 
-    @RequestMapping(value = RECEIVE, method = RequestMethod.GET)
-    public String getData(Model model) {
-        model.addAttribute("objectList", timeStamps);
+    @RequestMapping(value = RECEIVE_URL, method = RequestMethod.GET)
+    public String getTimeStamps(Model model) {
+        List<String> timeStamps = dataStoreInstance.getTimeStampsList();
+        List<String> timeStampsFormatted =  new ArrayList<>();
+        for (String timeStamp:timeStamps){
+            long time= Long.parseLong(timeStamp);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
+            timeStampsFormatted.add(sdf.format(time));
+        }
+        model.addAttribute(ModelAttributes.OBJECT_LIST, timeStampsFormatted);
         return "receive";
     }
 
