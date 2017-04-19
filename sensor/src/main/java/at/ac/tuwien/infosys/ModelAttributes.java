@@ -6,6 +6,7 @@ package at.ac.tuwien.infosys;
 public class ModelAttributes {
 
     public static final String RECEIVED_DATA_TIMESTAMPS_FORM = "receivedDataTimeStampsForm";
+    public static final String OBJECT_LIST = "objectList";
 
     private ModelAttributes() {
     }

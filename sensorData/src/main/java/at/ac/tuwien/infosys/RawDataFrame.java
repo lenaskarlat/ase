@@ -3,11 +3,9 @@ package at.ac.tuwien.infosys;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Objects;
 
 /**
  * taken from http://www.irc.atr.jp/crest2010_HRI/ATC_dataset/

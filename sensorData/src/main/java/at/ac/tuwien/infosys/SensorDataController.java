@@ -1,28 +1,9 @@
 package at.ac.tuwien.infosys;
 
-
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.client.methods.*;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.*;
-import java.net.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Stream;
 
-import static org.springframework.http.HttpHeaders.USER_AGENT;
 
 /**
  * Created by lenaskarlat on 4/12/17.
